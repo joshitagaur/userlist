@@ -115,8 +115,6 @@ app.controller('userInstanceCtrl', function($scope,$uibModalInstance) {
 		'status': 'active'
 	}
 
-	$scope.disabled = true;
-
 	$scope.addDetails = function() {
 		if($scope.newdetails.status === 'active') {
 			$scope.newdetails.showstatus = true;
