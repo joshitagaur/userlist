@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Users List</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="style.css">
+</head>
+<body ng-app="user">
+	<div ng-controller="userCtrl" class="container">
+	<h1>Users List</h1>
+	<input type="text" name="search" ng-model="search" placeholder="type to search..." ng-change="searchList(search)">
+	<button ng-click="addUser()">Add User</button>
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>First Name</th>
+				<th>Last Name</th>
+				<th>Email</th>
+				<th>Phone</th>
+				<th>Status</th>
+			</tr>
+		</thead>
+		<tbody>
+			<tr ng-repeat="user in userDetails track by $index">
+				<td>{{user.id}}</td>
+				<td>{{user.fname}}</td>
+				<td>{{user.lname}}</td>
+				<td>{{user.email}}</td>
+				<td>{{user.phone}}</td>
+				<td>
+				<button ng-click="changeStatus(user)">{{user.statusType}}</button>
+				</td>		
+			</tr>
+		</tbody>
+	</table>
+	</div>
+	<div class="modal-demo">
+    	<script type="text/ng-template" id="userForm.html">
+    		<div class="modal-header">
+            	<h3 class="modal-title" id="modal-title">Add User</h3>
+        	</div>
+        	<div class="modal-body" id="modal-body">
+        		<form name="form">
+        		<div class="row">
+        			<div class="col-md-3">First Name</div>
+        			<div class="col-md-9"><input type="text" ng-model="newdetails.fname" name="fname" required>
+        			</div>
+        			<div class="col-md-3">Last Name</div>
+        			<div class="col-md-9"><input type="text" ng-model="newdetails.lname" name="fname" required></div>
+        			<div class="col-md-3">Email</div>
+        			<div class="col-md-9"><input type="email" ng-model="newdetails.email" name="email" required></div>
+        			<div class="col-md-3">Phone</div>
+        			<div class="col-md-9"><input type="number" ng-model="newdetails.phone" name="fname" required></div>
+        			<div class="col-md-3">Status</div>
+        			<div class="col-md-9">
+        				<select ng-model="newdetails.status">
+        					<option value="active">Active</option>
+        					<option value="inactive">Inactive</option>
+        				</select>
+        			</div>
+        		</div>
+        	</form>
+        	</div>
+        	<div class="modal-footer">
+            	<button class="btn btn-primary" type="button" ng-click="close()">Close</button>
+            	<button ng-disabled="disabled" class="btn btn-warning" type="button" ng-click="addDetails()">Add</button>
+        	</div>
+    	</script>
+    </div>
+    <div>
+    	<script type="text/ng-template" id="activeForm.html">
+    		<div class="modal-header">
+            	<h3 class="modal-title" id="modal-title">Confirm Status Change</h3>
+        	</div>
+        	<div class="modal-body">
+        		<p>Are you sure you want to change the status for {{changeStatusDetails.fname}} {{changeStatusDetails.lname}} from {{changeStatusDetails.statusType}} to {{changeStatusDetails.revstatusType}}?</p>
+        	</div>
+        	<div class="modal-footer">
+        		<button class="btn btn-primary" type="button" ng-click="close()">Close</button>
+            	<button class="btn btn-warning" type="button" ng-click="confirm()">Change Status</button>
+        	</div>
+    	</script>
+    </div>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-animate.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular-touch.min.js"></script>
+	<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/angular-ui-bootstrap/2.5.0/ui-bootstrap-tpls.min.js"></script>
+	<script type="text/javascript" src="infosvc.js"></script>
+	<script type="text/javascript" src="app.js"></script>
+</body>
+</html>
